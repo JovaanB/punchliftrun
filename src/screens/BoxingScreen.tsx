@@ -1,10 +1,14 @@
-import { Text, View } from 'react-native';
+import { Button, Text } from 'react-native-paper';
+import { StackNavigationProp } from '@react-navigation/stack';
+import Layout from '../components/Layout';
+import ScreenTitle from '../components/ScreenTitle';
 
-const BoxingScreen = () => {
+const BoxingScreen = ({ navigation }: { navigation: StackNavigationProp<any> }) => {
   return (
-    <View>
-      <Text>Boxing</Text>
-    </View>
+    <Layout>
+      <ScreenTitle title="Boxe" />
+      <Button onPress={() => navigation.navigate("Timer")}>Minuteur</Button>
+    </Layout>
   );
 };
 

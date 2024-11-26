@@ -1,12 +1,13 @@
-import { Text, View } from 'react-native';
-import { Button } from 'react-native-paper';
+import { Text } from "react-native-paper";
+import Layout from "../components/Layout";
+import ScreenTitle from "../components/ScreenTitle";
+
 
 const HomeScreen = () => {
   return (
-    <View>
-      <Text>Home</Text>
-      <Button mode='contained'>Paper</Button>
-    </View>
+    <Layout>
+      <ScreenTitle title="Accueil" />
+    </Layout>
   );
 };
 
