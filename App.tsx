@@ -4,9 +4,13 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { RootSiblingParent } from 'react-native-root-siblings';
 import HomeScreen from './src/screens/HomeScreen';
 import BoxingScreen from './src/screens/BoxingScreen';
-import { MD3LightTheme as DefaultTheme, PaperProvider, Text } from 'react-native-paper';
+import {
+  MD3LightTheme as DefaultTheme,
+  PaperProvider,
+  Text,
+} from 'react-native-paper';
 import MaterialCommunityIcons from '@expo/vector-icons/MaterialCommunityIcons';
-import customColors from "./src/constants/colors";
+import customColors from './src/constants/colors';
 import './gesture-handler';
 import TimerScreen from './src/screens/TimerScreen';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
@@ -28,16 +32,19 @@ export type RootStackParamList = {
 
 const Stack = createStackNavigator<RootStackParamList>();
 
-const tabBarIcons: Record<string, keyof typeof MaterialCommunityIcons.glyphMap> = {
+const tabBarIcons: Record<
+  string,
+  keyof typeof MaterialCommunityIcons.glyphMap
+> = {
   Home: 'home',
   Boxing: 'boxing-glove',
-  Settings: "account-box-outline"
-}
+  Settings: 'account-box-outline',
+};
 
 export default function App() {
   const theme = {
     ...DefaultTheme,
-    colors: customColors
+    colors: customColors,
   };
 
   const Tab = createBottomTabNavigator();
@@ -70,9 +77,11 @@ export default function App() {
 
   const NativeStack = () => {
     return (
-      <Stack.Navigator screenOptions={{
-        headerShown: false
-      }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="Boxing" component={BoxingScreen} />
         <Stack.Screen name="Timer" component={TimerScreen} />
         <Stack.Screen name="SettingTimer" component={SettingTimerScreen} />
@@ -82,51 +91,81 @@ export default function App() {
 
   const UnauthenticatedStack = () => {
     return (
-      <Stack.Navigator screenOptions={{
-        headerShown: false
-      }}>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false,
+        }}
+      >
         <Stack.Screen name="Login" component={LoginScreen} />
         <Stack.Screen name="Register" component={RegisterScreen} />
       </Stack.Navigator>
-    )
+    );
   };
 
   const MainTabStack = () => {
     return (
-      <Tab.Navigator screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: false,
-      }}>
-        <Tab.Screen name="Home" component={HomeScreen} options={{
-          tabBarIcon: ({ color, size }) => {
-            return <MaterialCommunityIcons name={tabBarIcons.Home} color={color} size={size} />
-          }
-        }} />
-        <Tab.Screen name="NativeStack" component={NativeStack} options={{
-          tabBarIcon: ({ color, size }) => {
-            return <MaterialCommunityIcons name={tabBarIcons.Boxing} color={color} size={size} />
-          }
-        }} />
-        <Tab.Screen name="Settings" component={SettingsScreen} options={{
-          tabBarIcon: ({ color, size }) => {
-            return <MaterialCommunityIcons name={tabBarIcons.Settings} color={color} size={size} />
-          }
-        }} />
+      <Tab.Navigator
+        screenOptions={{
+          headerShown: false,
+          tabBarShowLabel: false,
+        }}
+      >
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <MaterialCommunityIcons
+                  name={tabBarIcons.Home}
+                  color={color}
+                  size={size}
+                />
+              );
+            },
+          }}
+        />
+        <Tab.Screen
+          name="NativeStack"
+          component={NativeStack}
+          options={{
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <MaterialCommunityIcons
+                  name={tabBarIcons.Boxing}
+                  color={color}
+                  size={size}
+                />
+              );
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Settings"
+          component={SettingsScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => {
+              return (
+                <MaterialCommunityIcons
+                  name={tabBarIcons.Settings}
+                  color={color}
+                  size={size}
+                />
+              );
+            },
+          }}
+        />
       </Tab.Navigator>
-    )
+    );
   };
 
   return (
     <PaperProvider theme={theme}>
       <RootSiblingParent>
         <NavigationContainer>
-          {user ? (
-            <MainTabStack />
-          ) : (
-            <UnauthenticatedStack />
-          )}
+          {user ? <MainTabStack /> : <UnauthenticatedStack />}
         </NavigationContainer>
       </RootSiblingParent>
-    </PaperProvider >
+    </PaperProvider>
   );
 }

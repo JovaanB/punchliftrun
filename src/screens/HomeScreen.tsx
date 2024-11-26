@@ -1,7 +1,6 @@
-import { Text } from "react-native-paper";
-import Layout from "../components/Layout";
-import ScreenTitle from "../components/ScreenTitle";
-
+import { Text } from 'react-native-paper';
+import Layout from '../components/Layout';
+import ScreenTitle from '../components/ScreenTitle';
 
 const HomeScreen = () => {
   return (
